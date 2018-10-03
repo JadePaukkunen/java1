@@ -129,6 +129,10 @@ class Juna extends Metodit {
         this.version = version;
     }
 
+    public String vainJunanTiedot() {
+        return "Juna: " + trainType + trainNumber + " Lähtee: "+ timeTableRows.get(0).getFormatoituScheduledTime();
+    }
+
     public String junanAsemaTiedot(){
         for(int i = 0; i <timeTableRows.size(); i++) {
 

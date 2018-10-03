@@ -8,6 +8,7 @@ public class Main {
 
     public static void valitseAsemat(){         // Valikko. Käyttäjä valitsee toiminnon. Väärän numeron syöttäminen johtaa paluuseen.
         Metodit metodi = new Metodit();
+        AsemienValinta valinta = new AsemienValinta();
         System.out.println("Valitse luku 1-4");
         System.out.println("1. Hae asemien perusteella");
         System.out.println("2. Hae junan tunnuksen perusteella");
@@ -16,7 +17,7 @@ public class Main {
         Scanner skanneri = new Scanner(System.in);
         String luku = skanneri.nextLine();
         if (luku.equals("1")) {
-            metodi.asemienValinta();
+            valinta.asemienValinta();
         }
         else if (luku.equals("2")){
             metodi.junanValinta();

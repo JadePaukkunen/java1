@@ -30,6 +30,22 @@ public class Metodit {
         return null;
     }
 
+    public List<Juna> haeReitinJunat(String lahto, String maara) {
+        String baseurl = "https://rata.digitraffic.fi/api/v1";
+        try {
+            URL url = new URL(URI.create(String.format("%s/live-trains/station/%s/%s", baseurl, lahto, maara)).toASCIIString());
+            ObjectMapper mapper = new ObjectMapper();
+            CollectionType tarkempiListanTyyppi = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Juna.class);
+            List<Juna> junaLista = mapper.readValue(url, tarkempiListanTyyppi);
+            return junaLista;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
+    }
+
     public List<Asema> lueAsemanJSONData() {
         String baseurl = "https://rata.digitraffic.fi/api/v1";
         try {
@@ -46,13 +62,7 @@ public class Metodit {
     }
 
 
-    public void asemienValinta() { // Käyttäjä antaa junan lähtö- ja päämääräasemat. Metodi etsii kyseisellä välillä kulkevat junat.
-        System.out.println("Syötä lähtöasema: ");
-        String lähtöAsema = skanneri.nextLine();
-        System.out.println("Syötä pääteasema: ");
-        String pääteAsema = skanneri.nextLine();
 
-    }
 
     public void junanValinta() {
         System.out.println("Anna junan tunnus: "); // Käyttäjä antaa junan tunnuksen, metodi hakee kyseisen junan tiedot.
