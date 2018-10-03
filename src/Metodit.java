@@ -2,77 +2,108 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
+import javax.print.DocFlavor;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
-public class Metodit{
+public class Metodit {
     Scanner skanneri = new Scanner(System.in);
+    List<Juna> junaLista;
+    List<Asema> asemaLista;
+    List<TimeTableRow> timeTableRows;
 
 
+    public List<Juna> lueJunanJSONData() {
+        String baseurl = "https://rata.digitraffic.fi/api/v1";
+        try {
+            URL url = new URL(URI.create(String.format("%s/live-trains", baseurl)).toASCIIString());
+            ObjectMapper mapper = new ObjectMapper();
+            CollectionType tarkempiListanTyyppi = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Juna.class);
+            junaLista = mapper.readValue(url, tarkempiListanTyyppi);
+            return junaLista;
 
-public void asemienValinta(){ // Käyttäjä antaa junan lähtö- ja päämääräasemat. Metodi etsii kyseisellä välillä kulkevat junat.
-    System.out.println();
-
-}
-public void junanValinta (){
-    System.out.println("Anna junan tunnus"); // Käyttäjä antaa junan tunnuksen, metodi hakee kyseisen junan tiedot.
-    String junanTunnus = skanneri.nextLine();
-//    System.out.println(juna.get(0).getTrainNumber());
-
-    System.out.println(lueJunanJSONData(junanTunnus));
-
-
-
-}
-public void sijaintitiedot(){ // HC-suoritus! Esitetään graafisesti junan sijainti. Cool wow.
-
-}
-
-
-
-
-
-/*
-Vaatii Jackson kirjaston:
-File | Project Structure
-Libraries >> Add >> Maven
-Etsi "jackson-databind", valitse esimerkiksi versio 2.0.5
-Asentuu Jacksonin databind, sekä core ja annotations
- */
-
-
-        public String lueJunanJSONData(String junanTyyppi) {
-            String baseurl = "https://rata.digitraffic.fi/api/v1";
-            try {
-                URL url = new URL(URI.create(String.format("%s/live-trains", baseurl)).toASCIIString());
-                ObjectMapper mapper = new ObjectMapper();
-                CollectionType tarkempiListanTyyppi = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Juna.class);
-                List<Juna> junat = mapper.readValue(url, tarkempiListanTyyppi);  // pelkkä List.class ei riitä tyypiksi
-//                System.out.println(junat.get(1).getTrainNumber());
-                // Seuraavaa varten on toteutettava TimeTableRow luokka:
-                //System.out.println(junat.get(0).getTimeTableRows().get(0).getScheduledTime());
-//                System.out.println("\n\n");
-//                System.out.println(junat.get(1));
-
-                for (int i = 0; i<junat.size(); i++){
-                    String junanId = junat.get(i).getTrainType()+junat.get(i).getTrainNumber();
-                    if (junanId.equals(junanTyyppi)) {
-                        return "" + junat.get(i);
-                    }
-                }
-
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-            return "fuck this shit";
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        return null;
+    }
+
+    public List<Asema> lueAsemanJSONData() {
+        String baseurl = "https://rata.digitraffic.fi/api/v1";
+        try {
+            URL url = new URL(URI.create(String.format("%s/metadata/stations", baseurl)).toASCIIString());
+            ObjectMapper mapper = new ObjectMapper();
+            CollectionType tarkempiListanTyyppi = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Asema.class);
+            asemaLista = mapper.readValue(url, tarkempiListanTyyppi);
+            return asemaLista;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public void asemienValinta() { // Käyttäjä antaa junan lähtö- ja päämääräasemat. Metodi etsii kyseisellä välillä kulkevat junat.
+        System.out.println("Syötä lähtöasema: ");
+        String lähtöAsema = skanneri.nextLine();
+        System.out.println("Syötä pääteasema: ");
+        String pääteAsema = skanneri.nextLine();
 
     }
+
+    public void junanValinta() {
+        System.out.println("Anna junan tunnus: "); // Käyttäjä antaa junan tunnuksen, metodi hakee kyseisen junan tiedot.
+        String junanTunnus = skanneri.nextLine();
+//        lueJunanJSONData().toString();
+        //lueJunanJSONData().indexOf(1);
+        String käyttäjänHakemaJuna = junanHaku(junanTunnus);
+        System.out.println(käyttäjänHakemaJuna);
+
+    }
+
+    public void sijaintitiedot() { // HC-suoritus! Esitetään graafisesti junan sijainti. Cool wow.
+
+    }
+
+    public String junanHaku(String junanTyyppi) {
+        if (junaLista == null) {
+            lueJunanJSONData();
+        }
+        for (int i = 0; i < junaLista.size(); i++) {
+            String junanId = junaLista.get(i).getTrainType() + junaLista.get(i).getTrainNumber();
+            if (junanId.equals(junanTyyppi)) {
+                return "" + junaLista.get(i);
+            }
+        }
+                return "";
+
+    }
+
+    public String asemienYhdistäminen(final String stationShortCode) {
+        if (asemaLista == null) {
+            lueAsemanJSONData();
+        }
+
+        Optional<String> nimi = asemaLista
+                .parallelStream()
+                .filter(a->a.getStationShortCode().equals(stationShortCode))
+                .map(Asema::getStationName)
+                .findFirst();
+        return nimi.orElse("Tuntematon");
+
+/*
+        for(Asema a : asemaLista) {
+            if (a.getStationShortCode().equals(stationShortCode)) {
+                return a.getStationName();
+            }
+        }
+        return "Tuntematon";
+*/
+    }
+}
 
 
 

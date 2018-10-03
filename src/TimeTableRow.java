@@ -1,6 +1,8 @@
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeTableRow {
@@ -14,13 +16,14 @@ public class TimeTableRow {
 
     @Override
     public String toString() {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ssZ");
+        String formatoituAika = df.format(scheduledTime);
+
         return "TimeTableRow{" +
                 "stationShortCode='" + stationShortCode + '\'' +
-                ", stationUICCode=" + stationUICCode +
-                ", countryCode='" + countryCode + '\'' +
                 ", type='" + type + '\'' +
                 ", trainStopping=" + trainStopping +
-                ", scheduledTime=" + scheduledTime +
+                ", scheduledTime=" + formatoituAika +
                 ", actualTime=" + actualTime +
                 '}';
     }
@@ -65,12 +68,29 @@ public class TimeTableRow {
         this.trainStopping = trainStopping;
     }
 
+    public String getFormatoituScheduledTime() {
+//        SimpleDateFormat
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String formatoituAika = df.format(scheduledTime);
+        return formatoituAika;
+    }
+
     public Date getScheduledTime() {
         return scheduledTime;
     }
 
     public void setScheduledTime(Date scheduledTime) {
         this.scheduledTime = scheduledTime;
+    }
+
+    public Optional<String> getFormatoituActualTime() {
+//        SimpleDateFormat
+        SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        if (actualTime != null) {
+            String formatoituAika2 = df2.format(actualTime);
+            return Optional.of(formatoituAika2);
+        }
+        return Optional.empty();
     }
 
     public Date getActualTime() {

@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.List;
 
-class Juna {
+class Juna extends Metodit {
     boolean cancelled;
     String commuterLineID;
     //LocalDate departureDate;  // Jackson ei oikein pidä Java 8 päivistä oletuksena
@@ -22,7 +22,7 @@ class Juna {
     @Override
     public String toString() {
 
-        return "" + asematiedot();
+        return "" + junanAsemaTiedot();
     }
 
     public boolean isCancelled() {
@@ -128,11 +128,15 @@ class Juna {
     public void setVersion(long version) {
         this.version = version;
     }
-    public String asematiedot(){
+
+    public String junanAsemaTiedot(){
         for(int i = 0; i <timeTableRows.size(); i++) {
 
-            System.out.println("Asema: " +timeTableRows.get(i).getStationShortCode()+ " Aikataulun mukainen aika: " +timeTableRows.get(i).getScheduledTime()+ " Toteutunut aika: " + timeTableRows.get(i).getActualTime());
+            System.out.println("Asema: " + asemienYhdistäminen(timeTableRows.get(i).getStationShortCode())
+                    + " Aikataulun mukainen aika: " +timeTableRows.get(i).getFormatoituScheduledTime()
+                    + " Toteutunut aika: " + timeTableRows.get(i).getFormatoituActualTime().orElse("---"));
         }
-        return "";
+
+        return null;
     }
 }
