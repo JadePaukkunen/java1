@@ -147,10 +147,7 @@ class Juna extends Metodit {
 
 
         }
-//    public void junaAsemanSaapuminen(){
-//        for (int j = 1; j < timeTableRows.size(); j += 2) {
-//            System.out.println(" Saapumisaika: " + timeTableRows.get(j).getFormatoituScheduledTime());
-//        }
+
 
 }
 

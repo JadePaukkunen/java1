@@ -65,12 +65,40 @@ public class Metodit {
 
 
     public void junanValinta() {
+        AsemienValinta asemienValinta=new AsemienValinta();
+        Main main = new Main();
         System.out.println("Anna junan tunnus: "); // Käyttäjä antaa junan tunnuksen, metodi hakee kyseisen junan tiedot.
         String junanTunnus = skanneri.nextLine();
 //        lueJunanJSONData().toString();
         //lueJunanJSONData().indexOf(1);
         String käyttäjänHakemaJuna = junanHaku(junanTunnus);
         System.out.println(käyttäjänHakemaJuna);
+
+        System.out.println("\n1. Tee haku uudestaan");
+        System.out.println("2. Hae aseman perusteella");
+        System.out.println("3. Lopeta");
+        String jatkonValinta = skanneri.nextLine();
+
+        if (jatkonValinta.equals("1")){
+            junanValinta();
+        }
+        else if (jatkonValinta.equals("2")){
+            asemienValinta.asemienValinta();
+        }
+        else if (jatkonValinta.equals("3")){
+            System.out.println("Kiitos käynnistä");
+        }else{
+            System.out.println("Lue ohjeet, urpo!");
+            System.out.println("Paluu etusivulle kolmessa sekuntissa");
+            try{
+                Thread.sleep(3000);}
+            catch (InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
+            main.valitseAsemat();
+        }
+
+
 
     }
 

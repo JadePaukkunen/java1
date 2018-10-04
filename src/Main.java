@@ -27,12 +27,12 @@ public class Main {
                 " / \\                             \\.\n" +
                 "|   |                            |.\n" +
                 " \\_ |                            |.\n" +
-                "    |      Valitse luku 1-4      |.\n" +
+                "    |      Valitse luku 1-3      |.\n" +
                 "    |                            |.\n" +
                 "    | 1. Hae asemien perusteella |.\n" +
                 "    | 2. Hae junan perusteella   |.\n" +
-                "    | 3. Hae paikkatiedoilla     |.\n" +
-                "    | 4. Lopeta                  |.\n" +
+                "    | 3. Lopeta                  |.\n" +
+                "    |                            |.\n" +
                 "    |                            |.\n" +
                 "    |                            |.\n" +
                 "    |                            |.\n" +
@@ -50,13 +50,17 @@ public class Main {
             metodi.junanValinta();
         }
         else if (luku.equals("3")){
-            metodi.sijaintitiedot();
-        }
-        else if (luku.equals("4")){
             System.out.println("Kiitti moi");
         }else{
-            System.out.println("Virheellinen syöte, valitse numero 1-4");
+            System.out.println("Virheellinen syöte, valitse numero 1-3");
+            System.out.println("Paluu etusivulle kolmessa sekuntissa");
+            try{
+                Thread.sleep(3000);}
+            catch (InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
             valitseAsemat();
+
         }
 
         }
