@@ -13,7 +13,7 @@ public class hakuToiminnot {
     List<TimeTableRow> timeTableRows;
 
 
-    public List<Juna> lueJunanJSONData() {
+    public List<Juna> lueJunanJSONData() {  // hakee sivustolta junien tiedot
         String baseurl = "https://rata.digitraffic.fi/api/v1";
         try {
             URL url = new URL(URI.create(String.format("%s/live-trains", baseurl)).toASCIIString());
@@ -28,7 +28,7 @@ public class hakuToiminnot {
         return null;
     }
 
-    public List<Juna> haeReitinJunat(String lahto, String maara) {
+    public List<Juna> haeReitinJunat(String lahto, String maara) { // hakee sivustolta reitin junat
         String baseurl = "https://rata.digitraffic.fi/api/v1";
         try {
             URL url = new URL(URI.create(String.format("%s/live-trains/station/%s/%s", baseurl, lahto, maara)).toASCIIString());
@@ -44,7 +44,7 @@ public class hakuToiminnot {
 
     }
 
-    public List<Asema> lueAsemanJSONData() {
+    public List<Asema> lueAsemanJSONData() { // hakee sivustolta asemien tiedot
         String baseurl = "https://rata.digitraffic.fi/api/v1";
         try {
             URL url = new URL(URI.create(String.format("%s/metadata/stations", baseurl)).toASCIIString());
@@ -96,7 +96,7 @@ public class hakuToiminnot {
 
     }
 
-    public String junanHaku(String junanTyyppi) {
+    public String junanHaku(String junanTyyppi) { // hakee käyttäjän syöttämällä id:llä ko. junan
         if (junaLista == null) {
             lueJunanJSONData();
         }
@@ -110,26 +110,18 @@ public class hakuToiminnot {
 
     }
 
-    public String asemienYhdistäminen(final String stationShortCode) {
+    public String asemienYhdistäminen(final String stationShortCode) { // yhdistää asemien lyhytkoodit
         if (asemaLista == null) {
             lueAsemanJSONData();
         }
 
         Optional<String> nimi = asemaLista
                 .parallelStream()
-                .filter(a->a.getStationShortCode().equalsIgnoreCase(stationShortCode))
+                .filter(a->a.getStationShortCode().equals(stationShortCode))
                 .map(Asema::getStationName)
                 .findFirst();
         return nimi.orElse("Tuntematon");
 
-/*
-        for(Asema a : asemaLista) {
-            if (a.getStationShortCode().equals(stationShortCode)) {
-                return a.getStationName();
-            }
-        }
-        return "Tuntematon";
-*/
     }
 }
 

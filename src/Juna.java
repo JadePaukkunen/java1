@@ -4,7 +4,6 @@ import java.util.List;
 class Juna extends hakuToiminnot {
     boolean cancelled;
     String commuterLineID;
-    //LocalDate departureDate;  // Jackson ei oikein pidä Java 8 päivistä oletuksena
     Date departureDate;
     String operatorShortCode;
     int operatorUICCode;
@@ -128,12 +127,13 @@ class Juna extends hakuToiminnot {
         this.version = version;
     }
 
-    public String vainJunanTiedot() {
+    public String vainJunanTiedot() { // yhdistetään junan tyyppi ja numero
         return "Juna: " + trainType + trainNumber + " Lähtee: " + timeTableRows.get(0).getFormatoituScheduledTime();
     }
 
-    public String junanAsemaTiedot() {
-        System.out.println("Asema: " + asemienYhdistäminen(timeTableRows.get(0).getStationShortCode())+" Lähtöaika: "+timeTableRows.get(0).getFormatoituScheduledTime());
+    public String junanAsemaTiedot() { // tulostaa aseman tiedot ja saapumis- sekä lähtöajan
+        System.out.println("Asema: " + asemienYhdistäminen(timeTableRows.get(0).getStationShortCode())
+                + " Lähtöaika: "+timeTableRows.get(0).getFormatoituScheduledTime());
         for (int i = 2; i < timeTableRows.size(); i += 2) {
 
             System.out.println("Asema: " + asemienYhdistäminen(timeTableRows.get(i).getStationShortCode())

@@ -16,7 +16,7 @@ public class TimeTableRow {
 
 
     @Override
-    public String toString() {
+    public String toString() { // tekee päivämääristä ja ajoista luettavat suomalaiseen silmään
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ssZ");
         String formatoituAika = df.format(scheduledTime);
 

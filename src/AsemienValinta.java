@@ -11,9 +11,14 @@ public class AsemienValinta extends hakuToiminnot {
 
     public void asemienValinta() { // Käyttäjä antaa junan lähtö- ja päämääräasemat. Metodi etsii kyseisellä välillä kulkevat junat.
         System.out.println("Syötä lähtöasema (esim. Helsinki): ");
-        String lähtöAsema = skanneri.nextLine();
+        String lähtöAsema = skanneri.nextLine().toLowerCase();
+        String lahtoasemanFiksaus = lähtöAsema.substring(0,1).toUpperCase();
+        lähtöAsema = lahtoasemanFiksaus+lähtöAsema.substring(1);
+
         System.out.println("Syötä pääteasema (esim. Lahti): ");
-        String pääteAsema = skanneri.nextLine();
+        String pääteAsema = skanneri.nextLine().toLowerCase();
+        String paateasemanFiksaus = pääteAsema.substring(0,1).toUpperCase();
+        pääteAsema = paateasemanFiksaus+pääteAsema.substring(1);
         String lahtoasemanMuunto = syötetynLahtoasemanMuunto(lähtöAsema);
         String paateasemanMuunto = syötetynPaateasemanMuunto(pääteAsema);
         String lähtö = lähtöAsemanMuunto(lahtoasemanMuunto);
@@ -50,8 +55,7 @@ public class AsemienValinta extends hakuToiminnot {
         }
     }
 
-    public String syötetynPaateasemanMuunto(String pääteAsema) {
-//        File file = new File ("asemat.properties");
+    public String syötetynPaateasemanMuunto(String pääteAsema) { // yhdistää properties-tiedoston pääteasemalle
         ResourceBundle rb = ResourceBundle.getBundle("asemat");
         if (rb.containsKey(pääteAsema)) {
             return "" + rb.getString(pääteAsema);
@@ -59,8 +63,7 @@ public class AsemienValinta extends hakuToiminnot {
         return "" + pääteAsema;
     }
 
-    public String syötetynLahtoasemanMuunto(String lähtöAsema) {
-//        File file = new File ("asemat.properties");
+    public String syötetynLahtoasemanMuunto(String lähtöAsema) { // yhdistää properties-tiedoston lähtöasemalle
         ResourceBundle rb = ResourceBundle.getBundle("asemat");
         if (rb.containsKey(lähtöAsema)) {
             return "" + rb.getString(lähtöAsema);
@@ -68,45 +71,27 @@ public class AsemienValinta extends hakuToiminnot {
         return "" + lähtöAsema;
     }
 
-    public String lähtöAsemanMuunto(String lähtöAsema) {
+    public String lähtöAsemanMuunto(String lähtöAsema) { // yhdistää aseman lyhytkoodin ja aseman nimen
         if (asemaLista == null) {
             lueAsemanJSONData();
         }
         for (int i = 0; i < asemaLista.size(); i++) {
             if (lähtöAsema.equals(asemaLista.get(i).stationName)) {
                 return asemaLista.get(i).stationShortCode;
-//            } else {
-//                System.out.println("Asemaa ei löytynyt!");
-//                System.out.println("Paluu etusivulle kolmessa sekunnissa");
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException ex) {
-//                    Thread.currentThread().interrupt();
-//                }
-//                main.ohjelmanKäynnistys();
             }
 
         }
         return null;
     }
 
-    public String reitinHaku(String lähtö, String pääte) {
+    public String reitinHaku(String lähtö, String pääte) { // katsoo onko lyhytkoodit samat molemmilla sivustoilla
         List<Juna> junat = haeReitinJunat(lähtö, pääte);
         return junat.stream()
                 .map(Juna::vainJunanTiedot)
                 .collect(Collectors.joining("\n"));
-/*
-        for (int i = 0; i < junaLista.get(i).timeTableRows.size(); i++) {
-            if (junaLista.get(i).timeTableRows.get(i).getStationShortCode().equals(lähtö)
-                    && junaLista.get(i).timeTableRows.get(i).getStationShortCode().equals(pääte)) {
-                return "" + junaLista.get(i).timeTableRows.get(i);
-            }
-        }
-*/
-
     }
 
-    public String pääteAsemanMuunto(String pääteAsema) {
+    public String pääteAsemanMuunto(String pääteAsema) { // katsoo onko pääteasema sama kuin sivustolla oleva aseman nimi
         if (asemaLista == null) {
             lueAsemanJSONData();
         }
@@ -114,19 +99,9 @@ public class AsemienValinta extends hakuToiminnot {
         for (int i = 0; i < asemaLista.size(); i++) {
             if (pääteAsema.equals(asemaLista.get(i).stationName)) {
                 return asemaLista.get(i).stationShortCode;
-//            } else {
-//                System.out.println("Asemaa ei löytynyt.");
-//                System.out.println("Paluu etusivulle kolmessa sekunnissa");
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException ex) {
-//                    Thread.currentThread().interrupt();
-//                }
-//                main.ohjelmanKäynnistys();
             } else {
                 ehto = true;
             }
-
         }
         if (ehto) {
             System.out.println("Asemaa ei löytynyt.");
