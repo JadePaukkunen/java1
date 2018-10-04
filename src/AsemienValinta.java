@@ -37,7 +37,7 @@ public class AsemienValinta extends Metodit {
             System.out.println("Kiitos käynnistä!");
         }else{
             System.out.println("Lue ohjeet, urpo!");
-            System.out.println("Paluu etusivulle kolmessa sekuntissa");
+            System.out.println("Paluu etusivulle kolmessa sekunnissa");
             try{
             Thread.sleep(3000);}
             catch (InterruptedException ex){

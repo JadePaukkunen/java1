@@ -53,7 +53,7 @@ public class Main {
             System.out.println("Kiitti moi");
         }else{
             System.out.println("Virheellinen syöte, valitse numero 1-3");
-            System.out.println("Paluu etusivulle kolmessa sekuntissa");
+            System.out.println("Paluu etusivulle kolmessa sekunnissa");
             try{
                 Thread.sleep(3000);}
             catch (InterruptedException ex){
