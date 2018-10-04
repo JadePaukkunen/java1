@@ -12,13 +12,31 @@ public class AsemienValinta extends hakuToiminnot {
     public void asemienValinta() { // Käyttäjä antaa junan lähtö- ja päämääräasemat. Metodi etsii kyseisellä välillä kulkevat junat.
         System.out.println("Syötä lähtöasema (esim. Helsinki): ");
         String lähtöAsema = skanneri.nextLine().toLowerCase();
-        String lahtoasemanFiksaus = lähtöAsema.substring(0,1).toUpperCase();
-        lähtöAsema = lahtoasemanFiksaus+lähtöAsema.substring(1);
+        if (lähtöAsema.isEmpty()) {
+            asemienValinta();
+        }
+        else {
+            String lahtoasemanFiksaus = lähtöAsema.substring(0,1).toUpperCase();
+            lähtöAsema = lahtoasemanFiksaus+lähtöAsema.substring(1);
+        }
 
         System.out.println("Syötä pääteasema (esim. Lahti): ");
         String pääteAsema = skanneri.nextLine().toLowerCase();
-        String paateasemanFiksaus = pääteAsema.substring(0,1).toUpperCase();
-        pääteAsema = paateasemanFiksaus+pääteAsema.substring(1);
+        if (pääteAsema.isEmpty()) {
+            System.out.println("Otappa uudestaan :)");
+            System.out.println("Paluu etusivulle kolmessa sekunnissa");
+            try{
+                Thread.sleep(3000);}
+            catch (InterruptedException ex){
+                Thread.currentThread().interrupt();
+            }
+            main.ohjelmanKäynnistys();
+
+        } else {
+            String paateasemanFiksaus = pääteAsema.substring(0,1).toUpperCase();
+            pääteAsema = paateasemanFiksaus+pääteAsema.substring(1);
+        }
+
         String lahtoasemanMuunto = syötetynLahtoasemanMuunto(lähtöAsema);
         String paateasemanMuunto = syötetynPaateasemanMuunto(pääteAsema);
         String lähtö = lähtöAsemanMuunto(lahtoasemanMuunto);
@@ -31,6 +49,9 @@ public class AsemienValinta extends hakuToiminnot {
         System.out.println("2. Syötä halutun junan tunnus");
         System.out.println("3. Lopeta");
         String jatkonValinta = skanneri.nextLine();
+        if (jatkonValinta.equals(null)) {
+            main.ohjelmanKäynnistys();
+        }
 
         if (jatkonValinta.equals("1")) {
             asemienValinta();

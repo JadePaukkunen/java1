@@ -67,6 +67,9 @@ public class hakuToiminnot {
         Main main = new Main();
         System.out.println("Anna junan tunnus: "); // Käyttäjä antaa junan tunnuksen, metodi hakee kyseisen junan tiedot.
         String junanTunnus = skanneri.nextLine();
+        if (junanTunnus.equals(null)) {
+            junanValinta();
+        }
         String käyttäjänHakemaJuna = junanHaku(junanTunnus);
         System.out.println(käyttäjänHakemaJuna);
 
@@ -74,6 +77,9 @@ public class hakuToiminnot {
         System.out.println("2. Hae aseman perusteella");
         System.out.println("3. Lopeta");
         String jatkonValinta = skanneri.nextLine();
+        if (jatkonValinta.equals(null)) {
+            junanValinta();
+        }
 
         if (jatkonValinta.equals("1")){
             junanValinta();
@@ -106,7 +112,7 @@ public class hakuToiminnot {
                 return "" + junaLista.get(i);
             }
         }
-                return "Valitsemasi juna ei kulje seuraavan kahden vuorokauden aikana.";
+                return "Valitsemasi juna ei kulje seuraavan vuorokauden aikana.";
 
     }
 

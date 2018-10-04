@@ -56,7 +56,7 @@ public class Main {
         catch (InterruptedException ex){
             Thread.currentThread().interrupt();
         }
-        System.out.println("    |        Exit: Lopeta        |.");
+        System.out.println("    | 3. Lopeta                  |.");
         try{
             Thread.sleep(100);}
         catch (InterruptedException ex){
@@ -114,16 +114,19 @@ public class Main {
 
         Scanner skanneri = new Scanner(System.in);
         String luku = skanneri.nextLine();
+        if (luku.equals(null)) {
+            ohjelmanKäynnistys();
+        }
         if (luku.equals("1")) {
             valinta.asemienValinta();
         }
          else if (luku.equals("2")){
             metodi.junanValinta();
         }
-         else if (luku.equals("Exit")){
+         else if (luku.equals("3")){
             System.out.println("Kiitos käynnistä!");
         }else{
-            System.out.println("Virheellinen syöte, valitse numero 1-2, Exit lopettaa");
+            System.out.println("Virheellinen syöte, valitse numero 1-3");
             System.out.println("Paluu etusivulle kolmessa sekunnissa");
             try{
                 Thread.sleep(3000);}
