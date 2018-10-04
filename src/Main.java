@@ -26,21 +26,92 @@ public class Main {
         System.out.println("   ______________________________\n" +
                 " / \\                             \\.\n" +
                 "|   |                            |.\n" +
-                " \\_ |                            |.\n" +
-                "    |      Valitse luku 1-3      |.\n" +
-                "    |                            |.\n" +
-                "    | 1. Hae asemien perusteella |.\n" +
-                "    | 2. Hae junan perusteella   |.\n" +
-                "    | 3. Lopeta                  |.\n" +
-                "    |                            |.\n" +
-                "    |                            |.\n" +
-                "    |                            |.\n" +
-                "    |                            |.\n" +
-                "    |                            |.\n" +
-                "    |                            |.\n" +
-                "    |   _________________________|___\n" +
-                "    |  /                            /.\n" +
-                "    \\_/____________________________/.");
+                " \\_ |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |      Valitse luku 1-3      |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    | 1. Hae asemien perusteella |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    | 2. Hae junan perusteella   |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    | 3. Lopeta                  |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |                            |.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |   _________________________|___");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    |  /                            /.");
+        try{
+            Thread.sleep(100);}
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("    \\_/____________________________/.");
+
         Scanner skanneri = new Scanner(System.in);
         String luku = skanneri.nextLine();
         if (luku.equals("1")) {
