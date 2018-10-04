@@ -9,11 +9,37 @@ public class Main {
     public static void valitseAsemat(){         // Valikko. Käyttäjä valitsee toiminnon. Väärän numeron syöttäminen johtaa paluuseen.
         Metodit metodi = new Metodit();
         AsemienValinta valinta = new AsemienValinta();
-        System.out.println("Valitse luku 1-4");
-        System.out.println("1. Hae asemien perusteella");
-        System.out.println("2. Hae junan tunnuksen perusteella");
-        System.out.println("3. Hae paikkatietojen mukaan (ehkä)");
-        System.out.println("4. Lopeta");
+        System.out.println("      _-====-__-======-__-========-_____-============-__\n" +
+                "               _(                                                 _)\n" +
+                "            OO(      •._.••´¯``•.¸¸.•`TERVETULOA`•.¸¸.•´´¯`••._.•     )_\n" +
+                "           0  (_                                                   _)\n" +
+                "         o0     (_                                                _)\n" +
+                "        o         '=-___-===-_____-========-___________-===-----='\n" +
+                "      .o                                _________\n" +
+                "     . ______          ______________  |         |      _____\n" +
+                "   _()_||__|| ________ |            |  |_________|   __||___||__\n" +
+                "  (   VR    | |      | |            | __Y______00_| |_         _|\n" +
+                " /-OO----OO\"\"=\"OO--OO\"=\"OO--------OO\"=\"OO-------OO\"=\"OO-------OO\"=P\n" +
+                "#####################################################################");
+
+        System.out.println("   ______________________________\n" +
+                " / \\                             \\.\n" +
+                "|   |                            |.\n" +
+                " \\_ |                            |.\n" +
+                "    |      Valitse luku 1-4      |.\n" +
+                "    |                            |.\n" +
+                "    | 1. Hae asemien perusteella |.\n" +
+                "    | 2. Hae junan perusteella   |.\n" +
+                "    | 3. Hae paikkatiedoilla     |.\n" +
+                "    | 4. Lopeta                  |.\n" +
+                "    |                            |.\n" +
+                "    |                            |.\n" +
+                "    |                            |.\n" +
+                "    |                            |.\n" +
+                "    |                            |.\n" +
+                "    |   _________________________|___\n" +
+                "    |  /                            /.\n" +
+                "    \\_/____________________________/.");
         Scanner skanneri = new Scanner(System.in);
         String luku = skanneri.nextLine();
         if (luku.equals("1")) {

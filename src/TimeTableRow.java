@@ -14,6 +14,7 @@ public class TimeTableRow {
     private Date scheduledTime;
     private Date actualTime;
 
+
     @Override
     public String toString() {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ssZ");

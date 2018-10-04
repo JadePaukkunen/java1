@@ -18,7 +18,6 @@ class Juna extends Metodit {
     long version;
 
 
-
     @Override
     public String toString() {
 
@@ -130,17 +129,33 @@ class Juna extends Metodit {
     }
 
     public String vainJunanTiedot() {
-        return "Juna: " + trainType + trainNumber + " Lähtee: "+ timeTableRows.get(0).getFormatoituScheduledTime();
+        return "Juna: " + trainType + trainNumber + " Lähtee: " + timeTableRows.get(0).getFormatoituScheduledTime();
     }
 
-    public String junanAsemaTiedot(){
-        for(int i = 0; i <timeTableRows.size(); i++) {
+    public String junanAsemaTiedot() {
+        System.out.println("Asema: " + asemienYhdistäminen(timeTableRows.get(0).getStationShortCode())+" Lähtöaika: "+timeTableRows.get(0).getFormatoituScheduledTime());
+        for (int i = 2; i < timeTableRows.size(); i += 2) {
 
             System.out.println("Asema: " + asemienYhdistäminen(timeTableRows.get(i).getStationShortCode())
-                    + " Aikataulun mukainen aika: " +timeTableRows.get(i).getFormatoituScheduledTime()
-                    + " Toteutunut aika: " + timeTableRows.get(i).getFormatoituActualTime().orElse("---"));
-        }
+                    + " Saapumisaika: " + timeTableRows.get(i-1).getFormatoituScheduledTime()
+                    + " Lähtöaika: " + timeTableRows.get(i).getFormatoituScheduledTime());
 
-        return null;
-    }
+        }
+        int viimeinen = timeTableRows.size() - 1;
+        return "Asema: " + asemienYhdistäminen(timeTableRows.get(viimeinen).getStationShortCode())
+                + " Saapumisaika: " + timeTableRows.get(viimeinen).getFormatoituScheduledTime();
+
+
+        }
+//    public void junaAsemanSaapuminen(){
+//        for (int j = 1; j < timeTableRows.size(); j += 2) {
+//            System.out.println(" Saapumisaika: " + timeTableRows.get(j).getFormatoituScheduledTime());
+//        }
+
 }
+
+
+
+
+
+
