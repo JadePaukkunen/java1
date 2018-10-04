@@ -9,7 +9,8 @@ public class Main {
     public static void valitseAsemat(){         // Valikko. Käyttäjä valitsee toiminnon. Väärän numeron syöttäminen johtaa paluuseen.
         Metodit metodi = new Metodit();
         AsemienValinta valinta = new AsemienValinta();
-        System.out.println("      _-====-__-======-__-========-_____-============-__\n" +
+        System.out.println(
+                "                 _-====-__-======-__-========-_____-============-__\n" +
                 "               _(                                                 _)\n" +
                 "            OO(      •._.••´¯``•.¸¸.•`TERVETULOA`•.¸¸.•´´¯`••._.•     )_\n" +
                 "           0  (_                                                   _)\n" +

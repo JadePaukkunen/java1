@@ -88,7 +88,7 @@ public class Metodit {
                 return "" + junaLista.get(i);
             }
         }
-                return "";
+                return "Valitsemasi juna ei kulje seuraavan kahden vuorokauden aikana.";
 
     }
 
