@@ -1,14 +1,12 @@
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
-import javax.print.DocFlavor;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
 
 
-public class Metodit {
+public class hakuToiminnot {
     Scanner skanneri = new Scanner(System.in);
     List<Juna> junaLista;
     List<Asema> asemaLista;
@@ -69,8 +67,6 @@ public class Metodit {
         Main main = new Main();
         System.out.println("Anna junan tunnus: "); // Käyttäjä antaa junan tunnuksen, metodi hakee kyseisen junan tiedot.
         String junanTunnus = skanneri.nextLine();
-//        lueJunanJSONData().toString();
-        //lueJunanJSONData().indexOf(1);
         String käyttäjänHakemaJuna = junanHaku(junanTunnus);
         System.out.println(käyttäjänHakemaJuna);
 
@@ -88,21 +84,15 @@ public class Metodit {
         else if (jatkonValinta.equals("3")){
             System.out.println("Kiitos käynnistä");
         }else{
-            System.out.println("Lue ohjeet, urpo!");
+            System.out.println("Lue ohjeet uudestaan kiitos :)");
             System.out.println("Paluu etusivulle kolmessa sekunnissa");
             try{
                 Thread.sleep(3000);}
             catch (InterruptedException ex){
                 Thread.currentThread().interrupt();
             }
-            main.valitseAsemat();
+            main.ohjelmanKäynnistys();
         }
-
-
-
-    }
-
-    public void sijaintitiedot() { // HC-suoritus! Esitetään graafisesti junan sijainti. Cool wow.
 
     }
 
@@ -127,7 +117,7 @@ public class Metodit {
 
         Optional<String> nimi = asemaLista
                 .parallelStream()
-                .filter(a->a.getStationShortCode().equals(stationShortCode))
+                .filter(a->a.getStationShortCode().equalsIgnoreCase(stationShortCode))
                 .map(Asema::getStationName)
                 .findFirst();
         return nimi.orElse("Tuntematon");

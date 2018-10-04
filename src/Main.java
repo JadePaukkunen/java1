@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        valitseAsemat();
+        ohjelmanKäynnistys();
 //
     }
 
-    public static void valitseAsemat(){         // Valikko. Käyttäjä valitsee toiminnon. Väärän numeron syöttäminen johtaa paluuseen.
-        Metodit metodi = new Metodit();
+    public static void ohjelmanKäynnistys(){         // Valikko. Käyttäjä valitsee toiminnon. Väärän numeron syöttäminen johtaa paluuseen.
+        hakuToiminnot metodi = new hakuToiminnot();
         AsemienValinta valinta = new AsemienValinta();
         System.out.println(
                 "                 _-====-__-======-__-========-_____-============-__\n" +
@@ -56,7 +56,7 @@ public class Main {
         catch (InterruptedException ex){
             Thread.currentThread().interrupt();
         }
-        System.out.println("    | 3. Lopeta                  |.");
+        System.out.println("    |        Exit: Lopeta        |.");
         try{
             Thread.sleep(100);}
         catch (InterruptedException ex){
@@ -117,20 +117,20 @@ public class Main {
         if (luku.equals("1")) {
             valinta.asemienValinta();
         }
-        else if (luku.equals("2")){
+         else if (luku.equals("2")){
             metodi.junanValinta();
         }
-        else if (luku.equals("3")){
-            System.out.println("Kiitti moi");
+         else if (luku.equals("Exit")){
+            System.out.println("Kiitos käynnistä!");
         }else{
-            System.out.println("Virheellinen syöte, valitse numero 1-3");
+            System.out.println("Virheellinen syöte, valitse numero 1-2, Exit lopettaa");
             System.out.println("Paluu etusivulle kolmessa sekunnissa");
             try{
                 Thread.sleep(3000);}
             catch (InterruptedException ex){
                 Thread.currentThread().interrupt();
             }
-            valitseAsemat();
+            ohjelmanKäynnistys();
 
         }
 

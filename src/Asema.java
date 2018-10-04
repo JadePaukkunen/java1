@@ -11,11 +11,6 @@ class Asema {
     float longitude;
     float latitude;
 
-//    @Override
-//    public String toString() {
-//
-// //       return "" + asemanNimi();
-//   // }
 
     public boolean isPassengerTraffic() {
         return passengerTraffic;

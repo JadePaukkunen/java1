@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.List;
 
-class Juna extends Metodit {
+class Juna extends hakuToiminnot {
     boolean cancelled;
     String commuterLineID;
     //LocalDate departureDate;  // Jackson ei oikein pidä Java 8 päivistä oletuksena
